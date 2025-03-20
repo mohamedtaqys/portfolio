@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohamed-Taqy Salmi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      background-color: #121212;
+      color: #f1f1f1;
+      height: 100%;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #121212;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 1;
+      transition: opacity 1.5s ease;
+    }
+
+    #loading-spinner {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #00C9A7 30%, #121212 70%);
+      box-shadow: 0 0 20px #00C9A7, 0 0 40px #00C9A7, 0 0 60px #00C9A7;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.9);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+
+      100% {
+        transform: scale(0.9);
+      }
+    }
+
+    #main-content {
+      display: none;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      animation: floatUp 4s ease-in-out infinite;
+      color: #00C9A7;
+    }
+
+    .countdown {
+      font-size: 2em;
+      margin-bottom: 30px;
+      animation: floatDown 4s ease-in-out infinite;
+      color: #FFD166;
+    }
+
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes floatDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(20px); }
+    }
+
+    .projects {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .project-item {
+      background: linear-gradient(135deg, #00C9A7, #FFD166);
+      padding: 20px 40px;
+      border-radius: 15px;
+      width: 300px;
+      color: #121212;
+      font-weight: bold;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transform: rotateY(180deg);
+      transition: opacity 1s, transform 1s;
+    }
+
+    .project-item.active {
+      opacity: 1;
+      transform: rotateY(0);
+    }
+
+    .socials {
+      margin-top: 30px;
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      position: relative;
+    }
+
+    .socials a {
+      color: #00C9A7;
+      font-size: 2em;
+      transition: transform 0.3s ease-in-out, color 0.3s;
+    }
+
+    .socials a:hover {
+  color: #FFD166;
+  transform: scale(1.1);
+}
+
+.socials a svg {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.3s ease;
+}
+
+.socials a:hover svg {
+  transform: scale(1.2);
+}
+
+    .tooltip {
+      position: absolute;
+      bottom: 40px;
+      background-color: #333;
+      padding: 5px 10px;
+      border-radius: 8px;
+      color: #fff;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.9em;
+      pointer-events: none;
+    }
+
+    .tooltip.show {
+      opacity: 1;
+    }
+
+    footer {
+      margin-top: 40px;
+      color: #aaa;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="loading-screen">
+    <div id="loading-spinner"></div>
+  </div>
+
+  <div id="main-content">
+    <h1>🚀 We’re Building Something Amazing!</h1>
+    <div class="countdown" id="countdown"></div>
+
+    <div class="projects">
+      <div class="project-item active">End-to-End Full-Stack Development</div>
+      <div class="project-item">Fine-Tuning AI Models for Optimal Performance</div>
+      <div class="project-item">Building Intelligent Chatbots with Intent Classification</div>
+      <div class="project-item">Developing and Implementing AI Models</div>
+      <div class="project-item">Other Innovative and Exciting AI Projects</div>
+    </div>
+
+    <div class="socials">
+        <div class="socials">
+            <div>
+              <a id="linkedin" href="https://www.linkedin.com/in/mohamedtaqysalmi" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24"><path fill="#FFD166" d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z"/></svg>
+              </a>
+              <div class="tooltip" id="linkedin-tooltip">Go to LinkedIn</div>
+            </div>
+            <div>
+              <a id="email">
+                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24"><path fill="#FFD166" d="M12 .02c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.99 6.98l-6.99 5.666-6.991-5.666h13.981zm.01 10h-14v-8.505l7 5.673 7-5.672v8.504z"/></svg>
+              </a>
+              <div class="tooltip" id="email-tooltip">mohamedtaqysalmi@gmail.com</div>
+            </div>
+            <div>
+              <a id="phone">
+                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24"><path fill="#FFD166" d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3.445 17.827c-3.684 1.684-9.401-9.43-5.8-11.308l1.053-.519 1.746 3.409-1.042.513c-1.095.587 1.185 5.04 2.305 4.497l1.032-.505 1.76 3.397-1.054.516z"/></svg>
+              </a>
+              <div class="tooltip" id="phone-tooltip">+212604906153</div>
+            </div>
+          </div>
+      </div>
+      
+      
+
+    <footer>
+      &copy; 2025 | Mohamed-Taqy Salmi | Follow us for updates 🚀
+    </footer>
+  </div>
+
+  <script>
+    // Smooth Loading Transition
+    setTimeout(() => {
+      const loading = document.getElementById("loading-screen");
+      const content = document.getElementById("main-content");
+      loading.style.opacity = '0';
+      setTimeout(() => {
+        loading.style.display = 'none';
+        content.style.display = 'flex';
+        setTimeout(() => { content.style.opacity = '1'; }, 50);
+      }, 1500);
+    }, 3000);
+
+    // Countdown Logic
+    const launchDate = new Date("April 5, 2025 00:00:00").getTime();
+    const countdownFunction = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById("countdown").innerHTML = `Launching In: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+      if (distance < 0) {
+        clearInterval(countdownFunction);
+        document.getElementById("countdown").innerHTML = "Website is Live!";
+      }
+    }, 1000);
+
+    // Rotate Projects
+    const projects = document.querySelectorAll(".project-item");
+    let currentProject = 0;
+    setInterval(() => {
+      projects[currentProject].classList.remove("active");
+      currentProject = (currentProject + 1) % projects.length;
+      projects[currentProject].classList.add("active");
+    }, 3000);
+
+    // Tooltip Show/Hide
+    const links = document.querySelectorAll(".socials a");
+    links.forEach(link => {
+      const tooltip = link.nextElementSibling;
+      link.addEventListener("mouseover", () => tooltip.classList.add("show"));
+      link.addEventListener("mouseout", () => tooltip.classList.remove("show"));
+    });
+
+    // Copy to clipboard logic
+    document.getElementById("email").addEventListener("click", () => {
+      navigator.clipboard.writeText("mohamedtaqysalmi@gmail.com").then(() => {
+        showCopied("email-tooltip");
+      });
+    });
+
+    document.getElementById("phone").addEventListener("click", () => {
+      navigator.clipboard.writeText("+2126 04 90 61 53").then(() => {
+        showCopied("phone-tooltip");
+      });
+    });
+
+    function showCopied(id) {
+      const tooltip = document.getElementById(id);
+      tooltip.textContent = "Copied!";
+      setTimeout(() => {
+        if (id === "email-tooltip") tooltip.textContent = "mohamedtaqysalmi@gmail.com";
+        if (id === "phone-tooltip") tooltip.textContent = "+212604906153";
+      }, 1500);
+    }
+  </script>
+
+</body>
+
+</html>
